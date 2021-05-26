@@ -23,6 +23,7 @@ namespace GeoDCNN
         public MainWindow()
         {
             InitializeComponent();
+            int a = 0;
         }
     }
 }
