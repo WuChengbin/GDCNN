@@ -7,11 +7,103 @@
         xmlns:local="clr-namespace:GeoDCNN"
         mc:Ignorable="d"
         xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"    
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="767" Width="1440"
+        pu:WindowXCaption.Background="#001526"
+        pu:WindowXCaption.Foreground="White"
+        pu:WindowXCaption.Height="35"   
+        BorderThickness="0">
     <pu:WindowX.Resources>
         <local:MapViewModel x:Key="MapViewModel" />
     </pu:WindowX.Resources>
     <Grid>
-        <esri:MapView Map="{Binding Map, Source={StaticResource MapViewModel}}" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid
+                  Margin="0,-35,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#001526" Offset="0.05"/>
+                        <GradientStop Color="#15557C" Offset="0.893"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <TextBox pu:TextBoxHelper.CornerRadius="5"
+                             pu:TextBoxHelper.Watermark="Search ..."
+                             Height="25"
+                             Margin="10,50,10,0"
+                             Padding="15,0,30,0"
+                             Grid.ColumnSpan="2" />
+                <Button HorizontalAlignment="Right"
+                            pu:ButtonHelper.ButtonStyle="Link"
+                            Content="&#xf002;"
+                            FontFamily="{StaticResource FontAwesome}"
+                            Margin="0,50,15,0"
+                            Width="30"
+                            Grid.Column="1" />
+                <TextBlock FontSize="30"
+                           FontWeight="Light"
+                           Foreground="White"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontFamily="Segoe UI"
+                           Margin="10,10,0,0">    
+                    <Run Foreground="#FF67DA82" FontFamily="{StaticResource FontAwesome}">&#xf110;</Run>
+                    <Run Foreground="#FF67DA82">G E O</Run>
+                    <Run>D C N N</Run>
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White"
+                                          ShadowDepth="0"
+                                          BlurRadius="10"
+                                          Opacity="0.5" />
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TreeView Grid.Row="1"
+                          Background="Transparent"
+                          pu:TreeViewHelper.ItemHeight="40"
+                          pu:TreeViewHelper.TreeViewStyle="Modern"
+                          pu:TreeViewHelper.SelectedBackground="#22FFFFFF"
+                          BorderBrush="White"
+                          Foreground="#AAFFFFFF">
+                    <TreeViewItem Header="数据加载" FontSize="16" pu:TreeViewHelper.ItemIcon="&#xf067;"/>
+                    <TreeViewItem Header="环境设置" FontSize="16" pu:TreeViewHelper.ItemIcon="&#xf013;"/>
+                    <TreeViewItem Header="工具集" FontSize="16" pu:TreeViewHelper.ItemIcon="&#xf0b1;"/>
+                    <TreeViewItem Header="更换地图" FontSize="16" pu:TreeViewHelper.ItemIcon="&#xf0ac;"/>
+                    <TreeViewItem Header="关于我们" FontSize="16" pu:TreeViewHelper.ItemIcon="&#xf0c0;"/>
+                    
+                </TreeView>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Grid Width="300"
+                      HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="17*" />
+                        <ColumnDefinition Width="43*" />
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <esri:MapView Map="{Binding Map, Source={StaticResource MapViewModel}}" Grid.Row="0" />
+                </Grid>
+                <Grid Grid.Row="2">
+                    <StatusBar Height="25" VerticalAlignment="Bottom" Background="#FFCA5100" Foreground="White">
+                        <StatusBarItem x:Name="StatusLocationLabel" Content="经度:{0} 纬度:{1}" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Visible" />
+                    </StatusBar>
+                    <pu:Loading Height="15" Width="20" LoadingStyle="Wave" Foreground="White" IsRunning="True" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                </Grid>
+                
+            </Grid>
+
+        </Grid>
+       
     </Grid>
 </pu:WindowX>
